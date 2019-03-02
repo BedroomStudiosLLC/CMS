@@ -2,7 +2,6 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/Connections/DatabaseConnection.php
 wampthemes/simple/style.css
 wampthemes/no-style/style.css
 wampthemes/modern/style.css
