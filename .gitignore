@@ -57,3 +57,8 @@ wamplangues/add_vhost_czech.php
 testmysql.php
 test_sockets.php
 add_vhost.php
+.idea/www.iml
+.idea/workspace.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/inspectionProfiles/profiles_settings.xml
