@@ -14,6 +14,8 @@
 			<h1>My First Heading</h1>
 
             <?php echo HTMLAlerts::GetHTMLAlert("<b>This</b> is a simple alert", BootstrapAlertType::PRIMARY); ?>
+			
+			<?php echo HTMLAlerts::GetHTMLAlertWHeader("Header", "I'm Gay", BootstrapAlertType::DANGER); ?>
 
 			<p>My first paragraph.</p>
 
