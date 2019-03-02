@@ -65,3 +65,4 @@ add_vhost.php
 .idea/webServers.xml
 .idea/vcs.xml
 .idea/deployment.xml
+Connections/DatabaseCredentials.php
