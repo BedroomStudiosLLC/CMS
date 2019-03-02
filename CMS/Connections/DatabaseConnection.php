@@ -7,7 +7,7 @@
 
 			if ($dbConnection === null){
 
-                require_once($_SERVER['DOCUMENT_ROOT'].'/Config/DatabaseCredentials.php');
+                require_once($_SERVER['DOCUMENT_ROOT'] . '/CMS/Config/DatabaseCredentials.php');
 
                 $dsn = DatabaseCredentials::GetDSN();
 
