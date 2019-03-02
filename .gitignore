@@ -62,3 +62,6 @@ add_vhost.php
 .idea/modules.xml
 .idea/misc.xml
 .idea/inspectionProfiles/profiles_settings.xml
+.idea/webServers.xml
+.idea/vcs.xml
+.idea/deployment.xml
