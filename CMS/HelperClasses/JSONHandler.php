@@ -1,6 +1,6 @@
 <?php
 
-class ConfigHandler
+class JSONHandler
 {
     public static function GetConfigElement($path, $element)
     {
@@ -9,7 +9,13 @@ class ConfigHandler
 
         $jsonConfig = json_decode($configFile, true);
 
-        return $jsonConfig[$element];
+        if ($element != null && $element != "")
+        {
+            return $jsonConfig[$element];
+        }
+        else{
+            return $jsonConfig;
+        }
 
     }
 }
