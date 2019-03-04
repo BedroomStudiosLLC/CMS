@@ -5,7 +5,7 @@
 <html>
     <head>
         <title>Page Title</title>
-        <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/Master/HTMLHeader.php'); ?>
+        <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/CMS/Master/HTMLHeader.php'); ?>
         <!-- Bootstrap documentation: https://getbootstrap.com/docs/4.3/getting-started/introduction/ -->
     </head>
     <body>
