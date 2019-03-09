@@ -21,10 +21,10 @@
         <!-- Bootstrap documentation: https://getbootstrap.com/docs/4.3/getting-started/introduction/ -->
         <style>
             .Main {
-                border-style: solid;
-                border-width: 2px;
-                border-radius: .5em;
-                border-color: #04569A;
+                //border-style: solid;
+                //border-width: 2px;
+                //border-radius: .5em;
+                //border-color: #04569A;
             }
             .Item {
                 border-style: solid;
@@ -98,8 +98,8 @@
     <body>
         <div class="container-fluid">
             <div class="row" style="margin-top: 3em;">
-                <div class="col-3"></div>
-                <div class="col-6">
+                <div class="col-2"></div>
+                <div class="col-8">
 
                     <h1 style="text-align: center">API Calls</h1>
 
@@ -117,7 +117,7 @@
 
                     </div>
                 </div>
-                <div class="col-3"></div>
+                <div class="col-2"></div>
             </div>
         </div>
         <?php

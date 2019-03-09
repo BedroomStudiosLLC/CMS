@@ -10,18 +10,18 @@ class APIHTML
 
         $json = JSONHandler::GetConfigElement($_SERVER['DOCUMENT_ROOT'] . '/CMS/Documentation/APIJSON.php', null);
 
-        //print_r($json);
-
         $index = 0;
 
         $html = '';
 
-        foreach ($json as $type) { //Type ex: CMS
-            //echo PHP_EOL . "HI:";
-            foreach ($type as $APICall) { //APICall ex: Bootstrap Alert Types
-                $html .= self::GetAPIHTMLBlock($APICall, $index);
-                $index += 1;
-            }
+        foreach ($json as $type) {
+			foreach ($type as $t){	
+				$html .= '<h2 style="text-align:center;">' . $t['CallName'] . '</h2>';
+				foreach ($t['Calls'] as $APICall) { //APICall ex: Bootstrap Alert Types
+					$html .= self::GetAPIHTMLBlock($APICall, $index);
+					$index += 1;
+				}
+			}
         }
 
         return $html;
@@ -33,20 +33,19 @@ class APIHTML
 
         $json = JSONHandler::GetConfigElement($_SERVER['DOCUMENT_ROOT'] . '/CMS/Documentation/APIJSON.php', null);
 
-        //print_r($json);
-
         $index = 0;
 
         $html = '';
 
-        foreach ($json as $type) { //Type ex: CMS
-            //echo PHP_EOL . "HI:";
-            foreach ($type as $APICall) { //APICall ex: Bootstrap Alert Types
-                if ($index == $indexVal){
-                    return $APICall;
-                }
-                $index += 1;
-            }
+		foreach ($json as $type) {
+			foreach ($type as $t){	
+				foreach ($t['Calls'] as $APICall) { //APICall ex: Bootstrap Alert Types
+					if ($index == $indexVal){
+						return $APICall;
+					}
+					$index += 1;
+				}
+			}
         }
 
         return -1;
