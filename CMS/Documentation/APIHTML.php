@@ -14,15 +14,23 @@ class APIHTML
 
         $html = '';
 
-        foreach ($json as $type) {
-			foreach ($type as $t){	
-				$html .= '<h2 style="text-align:center;">' . $t['CallName'] . '</h2>';
-				foreach ($t['Calls'] as $APICall) { //APICall ex: Bootstrap Alert Types
-					$html .= self::GetAPIHTMLBlock($APICall, $index);
-					$index += 1;
+		foreach ($json as $applicationHeader) { //CMS
+			
+			foreach ($applicationHeader as $iluvu) {
+				$html .= '<h2 style="text-align:center;font-size:3em" class="display-4" id="Header'.$index.'">' . $iluvu['GroupName'] . '</h2>';
+				foreach ($iluvu['Groups'] as $applicationCallGroup) { //CMS Group
+					foreach ($applicationCallGroup as $applicationCall){ 
+						foreach ($applicationCall as $Call){ //Calls
+							$html .= '<h2 style="text-align:center;font-size:2em;" class="display-4" id="Group'.$index.'">' . $Call['CallName'] . '</h2>';
+							foreach ($Call['Calls'] as $APICall) { //APICall ex: Bootstrap Alert Types
+								$html .= self::GetAPIHTMLBlock($APICall, $index);
+								$index += 1;
+							}
+						}
+					}
 				}
 			}
-        }
+		}
 
         return $html;
     }
@@ -37,16 +45,22 @@ class APIHTML
 
         $html = '';
 
-		foreach ($json as $type) {
-			foreach ($type as $t){	
-				foreach ($t['Calls'] as $APICall) { //APICall ex: Bootstrap Alert Types
-					if ($index == $indexVal){
-						return $APICall;
+		foreach ($json as $applicationHeader) { //CMS
+			foreach ($applicationHeader as $iluvu) {
+				foreach ($iluvu['Groups'] as $applicationCallGroup) { //CMS Group
+					foreach ($applicationCallGroup as $applicationCall){ 
+						foreach ($applicationCall as $Call){ //Calls
+							foreach ($Call['Calls'] as $APICall) { //APICall ex: Bootstrap Alert Types
+								if ($index == $indexVal){
+									return $APICall; //Found exact call
+								}
+								$index += 1;
+							}
+						}
 					}
-					$index += 1;
 				}
 			}
-        }
+		}
 
         return -1;
     }
@@ -58,7 +72,7 @@ class APIHTML
 
         $value = '<div class="Item" id="API'.$index.'">
                             <?php require_once ($_SERVER[\'DOCUMENT_ROOT\']. \'/CMS/HelperClasses/BootstrapAlertType.php\'); ?>
-                            <h3 style="display:inline">'.$apiCallJSON['Name'].'</h3><p style="display:inline; float: right"><b>URL:</b> '.$apiCallJSON['URL'].'</p>
+                            <h3 style="display:inline">'.$apiCallJSON['Name'].'</h3><p style="display:inline; float: right" class="minify"><b>URL:</b> '.$apiCallJSON['URL'].'</p>
                             <br>
                             <br>
                             <h6>Class: '.$apiCallJSON['Class'].'</h6>
@@ -112,4 +126,60 @@ class APIHTML
 
         return $value;
     }
+	
+	public static function GetTree()
+	{
+		require_once($_SERVER['DOCUMENT_ROOT'] . '/CMS/HelperClasses/JSONHandler.php');
+
+        $json = JSONHandler::GetConfigElement($_SERVER['DOCUMENT_ROOT'] . '/CMS/Documentation/APIJSON.php', null);
+
+        $index = 0;
+
+        $html = '<nav>';
+
+		$html .= '<ul id="tree" class="list-group list-group-root well">';
+		
+		/*foreach ($json as $applicationHeader) { //CMS
+			foreach ($applicationHeader as $iluvu) {
+				$html .= '<li class="list-group-item"><ul class="list-group"><span>'.$iluvu['GroupName'].'</span>';
+				foreach ($iluvu['Groups'] as $applicationCallGroup) { //CMS Group
+					foreach ($applicationCallGroup as $applicationCall){
+						foreach ($applicationCall as $Call){ //Calls
+							$html .= '<li class="list-group-item"><ul class="list-group"><span>'.$Call['CallName'].'</span>';
+							foreach ($Call['Calls'] as $APICall) { //APICall ex: Bootstrap Alert Types
+								$html .= '<li class="list-group-item"><span>'.$APICall['Name'].'</span>';
+							}
+							$html .= '</ul></li>';
+						}
+					}
+				}
+				$html .= '</ul></li>';
+			}
+		}*/
+		
+		$index = 0;
+		
+		foreach ($json as $applicationHeader) { //CMS
+			foreach ($applicationHeader as $iluvu) {
+				$html .= '<a href="#Header'.$index.'" class="list-group-item">'.$iluvu['GroupName'].'</a><div class="list-group">';
+				foreach ($iluvu['Groups'] as $applicationCallGroup) { //CMS Group
+					foreach ($applicationCallGroup as $applicationCall){
+						foreach ($applicationCall as $Call){ //Calls
+							$html .= '<a href="#Group'.$index.'" class="list-group-item">'.$Call['CallName'].'</a><div class="list-group">';
+							foreach ($Call['Calls'] as $APICall) { //APICall ex: Bootstrap Alert Types
+								$html .= '<a href="#API'.$index.'" class="list-group-item">'.$APICall['Name'].'</a>';
+								$index++;
+							}
+							$html .= '</li></div>';
+						}
+					}
+				}
+				$html .= '</li></div>';
+			}
+		}
+		
+		$html .= '</ul></nav>';
+		
+        return $html;
+	}
 }

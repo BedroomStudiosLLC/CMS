@@ -30,10 +30,10 @@
                 border-style: solid;
                 border-width: 2px;
                 border-radius: .5em;
-                background-color: #4dd0e1;
+                background-color: white;
                 padding: 1em;
                 margin: 1em;
-                border-color: #04569A;
+                border-color: lightgray;
             }
             .Output{
                 background-color: lightgray;
@@ -65,7 +65,40 @@
                 border: 1px solid #4dd0e1;
                 box-shadow: 0 0 0 1px #4dd0e1;
             }
-        </style>
+			.navigation-tree li span {
+				border: 5px solid #4dd0e1;
+				padding: .2em;
+				margin: .2em;
+				//background-color: yellow;
+			}
+			
+			.list-group.list-group-root {
+			  padding: 0;
+			  overflow: hidden;
+			}
+
+			.list-group.list-group-root .list-group {
+			  margin-bottom: 0;
+			}
+
+			.list-group.list-group-root .list-group-item {
+			  border-radius: 0;
+			  border-width: 1px 0 0 0;
+			  color: black;
+			}
+
+			.list-group.list-group-root > .list-group-item:first-child {
+			  border-top-width: 0;
+			}
+
+			.list-group.list-group-root > .list-group > .list-group-item {
+			  padding-left: 30px;
+			}
+
+			.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+			  padding-left: 45px;
+			}
+		</style>
         <script>
             function showRAWHTML(APIID) {
                 if( $('#'+APIID).find('.RawHTML').val() == "true") {
@@ -96,28 +129,31 @@
         </script>
     </head>
     <body>
+		<?php require_once($_SERVER['DOCUMENT_ROOT'].'/CMS/Master/HTMLAdminNavBar.php') ?>
         <div class="container-fluid">
-            <div class="row" style="margin-top: 3em;">
-                <div class="col-2"></div>
-                <div class="col-8">
-
-                    <h1 style="text-align: center">API Calls</h1>
-
+			<h1 style="text-align: center; margin-top: 1em;" class="display-4">API Calls</h1>
+			<hr>
+            <div class="row" style="margin-top: 4em;">
+                <div class="col-md-2" style="">
+					<?php 
+						require_once ($_SERVER['DOCUMENT_ROOT']. '/CMS/Documentation/APIHTML.php');
+						echo APIHTML::GetTree(); 
+					?>
+				</div>
+                <div class="col-md-8">
                     <!--<div class="active-cyan-3 active-cyan-4 mb-4">
                         <input class="form-control" type="text" placeholder="Search" aria-label="Search">
                     </div>-->
 
-                    <div class="Main" style="margin-top: 3em;">
+                    <div class="Main" style="">
 
                         <?php
-                            require_once ($_SERVER['DOCUMENT_ROOT']. '/CMS/Documentation/APIHTML.php');
-
                             echo APIHTML::GETAPIHTMLAll();
                         ?>
 
                     </div>
                 </div>
-                <div class="col-2"></div>
+                <div class="col-md-2"></div>
             </div>
         </div>
         <?php
