@@ -1,8 +1,8 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT'] . '/CMS/Connections/DatabaseConnection.php');
     require_once($_SERVER['DOCUMENT_ROOT'] . '/CMS/HelperClasses/JSONHandler.php');
-
-    if (JSONHandler::GetConfigElement($_SERVER['DOCUMENT_ROOT'].'/CMS/Config/JSONConfig.php','debugMode') == true)
+	
+    if (JSONHandler::GetConfigElement($_SERVER['DOCUMENT_ROOT'].'/CMS/Config/JSONConfig.php','debugMode') == 'true')
     {
         error_reporting(E_ALL);
     }
@@ -21,3 +21,54 @@
 
     <script async src="<?php echo JSONHandler::GetConfigElement($_SERVER['DOCUMENT_ROOT'].'/CMS/Config/JSONConfig.php','googleAnalyticsAPI'); ?>"></script>
     <link rel="stylesheet" href="<?php echo JSONHandler::GetConfigElement($_SERVER['DOCUMENT_ROOT'].'/CMS/Config/JSONConfig.php','bootstrapCSS'); ?>">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css" rel="stylesheet" type="text/css"/>
+	
+	<style>
+		@font-face {
+		  font-family: SegoeUI;
+		  src: local(CMS/Fonts/SegoeUI.ttf);
+		}
+		
+		@font-face {
+		  font-family: SegoeUIBold;
+		  src: local(CMS/Fonts/SegoeUIBold.ttf);
+		}
+
+		body{
+			font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+		}
+		html {
+			font-size: 1rem;
+		}
+
+	.minify{
+		font-size: .82rem;
+	}
+	
+	@include media-breakpoint-up(sm) {
+	  html {
+		font-size: 1.2rem;
+	  }
+	  .minify {
+		  font-size: .6rem;
+	  }
+	}
+
+	@include media-breakpoint-up(md) {
+	  html {
+		font-size: 1.4rem;
+	  }
+	  .minify {
+		  font-size: .6rem;
+	  }
+	}
+
+	@include media-breakpoint-up(lg) {
+	  html {
+		font-size: 1.6rem;
+	  }
+	  .minify {
+		  font-size: .6rem;
+	  }
+	}
+	</style>
