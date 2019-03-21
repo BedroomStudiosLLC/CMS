@@ -16,7 +16,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
     <head>
-        <title>Page Title</title>
+        <title>CMS - API</title>
         <?php require_once($_SERVER['DOCUMENT_ROOT'] . '/CMS/Master/HTMLHeader.php'); ?>
         <!-- Bootstrap documentation: https://getbootstrap.com/docs/4.3/getting-started/introduction/ -->
         <style>
