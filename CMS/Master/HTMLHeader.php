@@ -53,6 +53,10 @@
 		font-size: .82rem;
 	}
 	
+	.showMobileOnly{
+		display:none;
+	}
+	
 	@include media-breakpoint-up(sm) {
 	  html {
 		font-size: 1.2rem;
@@ -75,8 +79,62 @@
 	  html {
 		font-size: 1.6rem;
 	  }
-	  .minify {
-		  font-size: .6rem;
-	  }
+
 	}
+	
+	@media only screen and (max-width: 600px) {
+		.showMobileOnly{
+			display:inline;
+		}
+	} 
+	
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+	html {
+		font-size: .8rem;
+	}
+	.minify {
+		font-size: .8rem;
+	}
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	html {
+		font-size: .9rem;
+	}
+	.minify {
+		font-size: .8rem;
+	}
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	html {
+		font-size: 1rem;
+	}
+	.minify {
+		font-size: .8rem;
+	}
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+	html {
+		font-size: 1rem;
+	}
+	.minify {
+		font-size: .9rem;
+	}
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+	html {
+		font-size: 1rem;
+	}
+	.minify {
+		  font-size: 1rem;
+	}
+}
 	</style>

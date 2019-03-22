@@ -87,7 +87,7 @@ class APIHTML
 
 			$value = '<div class="Item" id="API'.$index.'">
 								<?php require_once ($_SERVER[\'DOCUMENT_ROOT\']. \'/CMS/HelperClasses/BootstrapAlertType.php\'); ?>
-								<h3 style="display:inline">'.$apiCallJSON['Name'].'</h3><p style="display:inline; float: right" class="minify"><b>URL:</b> '.$apiCallJSON['URL'].'</p>
+								<h3 style="display:inline">'.$apiCallJSON['Name'].'</h3><p style="display:inline; float: right; margin-top:.4em;" class="minify"><b>URL:</b> '.$apiCallJSON['URL'].'</p>
 								<br>
 								<br>
 								<h6>Class: '.$apiCallJSON['Class'].'</h6>
@@ -157,7 +157,10 @@ class APIHTML
 
 			$index = 0;
 
-			$html = '<nav>';
+			$html = '<nav class="navbar navbar-expand-lg navbar-light"><a class="navbar-brand showMobileOnly" href="#">Calls</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTree" aria-controls="navbarTree" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button><div class="collapse navbar-collapse" id="navbarTree">';
 
 			$html .= '<ul id="tree" class="list-group list-group-root well">';
 			
@@ -200,7 +203,7 @@ class APIHTML
 				}
 			}
 			
-			$html .= '</ul></nav>';
+			$html .= '</ul></div></nav>';
 			
 			return $html;
 		}
