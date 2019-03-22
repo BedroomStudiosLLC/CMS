@@ -1,7 +1,5 @@
 <?php
 
-    //TODO create JSON file, Load JSON file
-
     $isRunningAPICommand = false;
 
     //Show API calls and plugins
@@ -160,63 +158,69 @@
 
         if ($isRunningAPICommand)
         {
-            $outputValue = 'Error';
-            $failed = false;
+			try
+			{
+				$outputValue = 'Error';
+				$failed = false;
 
-            echo '<script>window.location.hash = "'.'API'.$_POST['APINumber'].'"</script>';
+				echo '<script>window.location.hash = "'.'API'.$_POST['APINumber'].'"</script>';
 
-            $apiCall = APIHTML::GETAPI($_POST['APINumber']);
+				$apiCall = APIHTML::GETAPI($_POST['APINumber']);
 
-            if ($apiCall == -1)
-            {
-                echo 'API Error';
-            }
+				if ($apiCall == -1)
+				{
+					echo 'API Error';
+				}
 
-            switch ($apiCall['Type'])
-            {
-                case 'CONSTANT':
-                    $value = GetConstant($_POST['inputParam0']);
-                    if ($value == -1)
-                        $outputValue = 'Error: Constant not valid.';
-                    else
-                        $outputValue = $value;
-                    break;
+				switch ($apiCall['Type'])
+				{
+					case 'CONSTANT':
+						$value = GetConstant($_POST['inputParam0']);
+						if ($value == -1)
+							$outputValue = 'Error: Constant not valid.';
+						else
+							$outputValue = $value;
+						break;
 
-                case 'FUNCTION':
-                    if (isset($_POST['inputParam0'])) {
+					case 'FUNCTION':
+						if (isset($_POST['inputParam0'])) {
 
-                        $parameterArray = array();
+							$parameterArray = array();
 
-                        for ($i = 0; $i < 2; $i++) {
-                            if (isset($apiCall['PlaceHolders'][$i]['Type']))
-                            {
-                                switch ($apiCall['PlaceHolders'][$i]['Type']) {
-                                    case "CONSTANT":
-                                        $value = GetConstant($_POST['inputParam' . $i]);
-                                        if ($value == -1)
-                                        {
-                                            $outputValue = 'Error: Constant not valid.';
-                                            $failed = true;
-                                        }
+							for ($i = 0; $i < 2; $i++) {
+								if (isset($apiCall['PlaceHolders'][$i]['Type']))
+								{
+									switch ($apiCall['PlaceHolders'][$i]['Type']) {
+										case "CONSTANT":
+											$value = GetConstant($_POST['inputParam' . $i]);
+											if ($value == -1)
+											{
+												$outputValue = 'Error: Constant not valid.';
+												$failed = true;
+											}
 
-                                        $parameterArray[$i] = $value;
-                                        break;
-                                }
-                            }
-                            else
-                            {
-                                $parameterArray[$i] = $_POST['inputParam' . $i];
-                            }
-                        }
+											$parameterArray[$i] = $value;
+											break;
+									}
+								}
+								else
+								{
+									$parameterArray[$i] = $_POST['inputParam' . $i];
+								}
+							}
 
-                        if (!$failed) //Run function if hadn't failed
-                            $outputValue = call_user_func_array($apiCall['FunctionName'], $parameterArray);
-                    }
-                    break;
-            }
+							if (!$failed) //Run function if hadn't failed
+								$outputValue = call_user_func_array($apiCall['FunctionName'], $parameterArray);
+						}
+						break;
+				}
 
-            echo "<script>$(document).ready( function() { $('#API" . $_POST['APINumber'] . "').find('.OutputValue').html('" . $outputValue . "'); })</script>";
-
+				echo "<script>$(document).ready( function() { $('#API" . $_POST['APINumber'] . "').find('.OutputValue').html('" . $outputValue . "'); })</script>";
+			}
+			catch (Exception $e)
+			{
+				LogHandler::SaveLog(LogType::ERROR, 'isRunningAPICommand', $e);
+			}
         }
 
         function GetConstant($constant)

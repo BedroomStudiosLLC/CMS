@@ -1,15 +1,23 @@
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/CMS/Connections/DatabaseConnection.php');
-    require_once($_SERVER['DOCUMENT_ROOT'] . '/CMS/HelperClasses/JSONHandler.php');
-	
-    if (JSONHandler::GetConfigElement($_SERVER['DOCUMENT_ROOT'].'/CMS/Config/JSONConfig.php','debugMode') == 'true')
-    {
-        error_reporting(E_ALL);
-    }
-    else
-    {
-        error_reporting(0);
-    }
+	try
+	{
+		require_once($_SERVER['DOCUMENT_ROOT'] . '/CMS/Connections/DatabaseConnection.php');
+		require_once($_SERVER['DOCUMENT_ROOT'] . '/CMS/HelperClasses/JSONHandler.php');
+		require_once($_SERVER['DOCUMENT_ROOT'] . '/CMS/HelperClasses/LogHandler.php');
+		
+		if (JSONHandler::GetConfigElement($_SERVER['DOCUMENT_ROOT'].'/CMS/Config/JSONConfig.php','debugMode') == 'true')
+		{
+			error_reporting(E_ALL);
+		}
+		else
+		{
+			error_reporting(0);
+		}
+	}
+	catch (Exception $e)
+	{
+		LogHandler::SaveLog(LogType::ERROR, 'HTMLHeader', $e);
+	}
 ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
