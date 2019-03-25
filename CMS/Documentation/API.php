@@ -1,5 +1,7 @@
 <?php
 
+	require_once ($_SERVER['DOCUMENT_ROOT']. '/CMS/Documentation/APIHTML.php');
+
     $isRunningAPICommand = false;
 
     //Show API calls and plugins
@@ -127,16 +129,12 @@
         </script>
     </head>
     <body>
-		<?php require_once($_SERVER['DOCUMENT_ROOT'].'/CMS/Master/HTMLAdminNavBar.php') ?>
         <div class="container-fluid">
-			<h1 style="text-align: center; margin-top: 1em;" class="display-4">API Calls</h1>
+			<?php require_once($_SERVER['DOCUMENT_ROOT'].'/CMS/Master/HTMLAdminNavSidebar.php') ?>
+			<h1 style="text-align: center;" class="display-4">API Calls</h1>
 			<hr>
-            <div class="row" style="margin-top: 4em;">
-                <div class="col-md-2" style="">
-					<?php 
-						require_once ($_SERVER['DOCUMENT_ROOT']. '/CMS/Documentation/APIHTML.php');
-						echo APIHTML::GetTree(); 
-					?>
+            <div class="row flex-column-reverse flex-md-row" style="margin-top: 4em;">
+                <div class="col-md-2">
 				</div>
                 <div class="col-md-8">
                     <!--<div class="active-cyan-3 active-cyan-4 mb-4">
@@ -151,7 +149,11 @@
 
                     </div>
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-2">
+				<?php
+					echo APIHTML::GetTree(); 
+				?>
+				</div>
             </div>
         </div>
         <?php
